@@ -5,7 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "babel-node": "babel-node -r node_modules/dotenv/config src/server.ts --extensions \".ts\"",
-    "start": "nodemon -e ts src/server.ts"
+    "start": "eval $(cat.env) nodemon -e ts src/server.ts"
   },
   "keywords": [],
   "author": "",
