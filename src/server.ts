@@ -12,6 +12,8 @@ import { jsonify, logger, timer } from "./middleware";
 import router from "./router";
 import UCLAPI from "./uclapi";
 
+require("dotenv").config();
+
 // eslint-disable-next-line security/detect-non-literal-fs-filename
 const { version } = JSON.parse(fs.readFileSync(`./package.json`, `utf-8`));
 
