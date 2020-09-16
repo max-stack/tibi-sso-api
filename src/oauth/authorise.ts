@@ -6,7 +6,8 @@ import Environment from "../lib/Environment";
 const authorise = async (ctx: Context): Promise<void> => {
   ctx.session = {
     state: moment().valueOf(),
-    redirectURL: `https://www.google.com`,
+    redirectURL:
+      decodeURIComponent(ctx.query.return) || `https://www.google.com`,
     //redirectURL: decodeURIComponent(ctx.query.return) || `UCLAssistant://+auth`,
   };
   console.log(ctx.query);
