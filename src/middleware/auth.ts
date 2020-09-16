@@ -4,7 +4,7 @@ import koaJwt from "koa-jwt";
 import Environment from "../lib/Environment";
 
 export const authenticate = async (ctx: Context, next: Next): Promise<void> => {
-  if (ctx.session.usNew) {
+  if (ctx.session.isNew) {
     ctx.throw("You need to be authenticated to access this endpoint", 401);
   } else {
     await next();
