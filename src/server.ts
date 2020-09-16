@@ -79,7 +79,7 @@ app.use(mount(router));
 app.on(`error`, ErrorManager.koaErrorHandler);
 
 if (!module.parent) {
-  const port = Environment.PORT || 3000;
+  const port = Environment.PORT || 443;
   app.listen(port);
   console.log(`Tibi API listening on ${port}`);
 }
