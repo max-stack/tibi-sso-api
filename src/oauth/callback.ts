@@ -8,7 +8,7 @@ const callback = async (ctx: Context): Promise<void> => {
   console.log(
     "HIPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPYYYYYYYYYYYYYYYY"
   );
-  console.log(`${Object.keys(ctx.session)}`);
+  console.log(ctx.session);
   console.log("Hey");
   if (!Object.keys(ctx.session).includes("state")) {
     ctx.throw("You need to authorise first", 401);
