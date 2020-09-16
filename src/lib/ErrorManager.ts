@@ -12,7 +12,7 @@ class ErrorManager {
           dsn: SENTRY_DSN,
         });
       } else {
-        console.error(`Sentry DSN not provided!`);
+        console.error("Sentry DSN not provided!");
       }
     }
   };
@@ -21,7 +21,7 @@ class ErrorManager {
     if (Environment.PRODUCTION_MODE) {
       Sentry.addBreadcrumb({ ...details });
     } else {
-      console.info(`ErrorManager.addDetail`, JSON.stringify(details));
+      console.info("ErrorManager.addDetail", JSON.stringify(details));
     }
   };
 
@@ -29,7 +29,7 @@ class ErrorManager {
     if (Environment.PRODUCTION_MODE) {
       Sentry.captureException(error);
     } else {
-      console.error(`ErrorManager.captureError`, error);
+      console.error("ErrorManager.captureError", error);
     }
   };
 

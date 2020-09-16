@@ -6,7 +6,7 @@ import Environment from "../lib/Environment";
 const authorise = async (ctx: Context): Promise<void> => {
   ctx.session = {
     state: moment().valueOf(),
-    redirectURL: decodeURIComponent(ctx.query.return) || `UCLAssistant://+auth`,
+    redirectURL: decodeURIComponent(ctx.query.return) || `mychat://chat`,
   };
   const url = `${ApiRoutes.API_URL}/oauth/authorise?client_id=${Environment.CLIENT_ID}&state=${ctx.session.state}`;
   ctx.redirect(url);

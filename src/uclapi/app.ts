@@ -21,12 +21,10 @@ router.get(`/timetable`, jwt, async (ctx) => {
     async () => getPersonalTimetable(ctx.state.user.apiToken, date),
     redis.ttl.TIMETABLE_TTL
   );
-
   const { lastModified, data } = timetableData;
   ctx.body = data;
   ctx.set(`Last-Modified`, lastModified);
 });
-
 router.get(`/timetable/:module`, jwt, async (ctx) => {
   ctx.assert(ctx.params.module, 400);
   const { module: timetableModule } = ctx.params;
