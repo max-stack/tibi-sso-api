@@ -5,6 +5,10 @@ import User from "../uclapi/user";
 const { getToken, getUserData } = User;
 
 const callback = async (ctx: Context): Promise<void> => {
+  console.log(
+    "HIPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPYYYYYYYYYYYYYYYY"
+  );
+  console.log(`${Object.keys(ctx.session)}`);
   if (!Object.keys(ctx.session).includes("state")) {
     ctx.throw("You need to authorise first", 401);
   }
