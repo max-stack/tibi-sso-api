@@ -6,7 +6,8 @@ import Environment from "../lib/Environment";
 const authorise = async (ctx: Context): Promise<void> => {
   ctx.session = {
     state: moment().valueOf(),
-    redirectURL: decodeURIComponent(ctx.query.return) || `Tibi://+auth`,
+    redirectURL:
+      decodeURIComponent(ctx.query.return) || `https://www.google.com`,
   };
   const url = `${ApiRoutes.API_URL}/oauth/authorise?client_id=${Environment.CLIENT_ID}&state=${ctx.session.state}`;
   ctx.redirect(url);
