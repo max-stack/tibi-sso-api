@@ -9,10 +9,9 @@ import { promisify } from "util";
 import Environment from "./lib/Environment";
 import ErrorManager from "./lib/ErrorManager";
 import { jsonify, logger, timer } from "./middleware";
+import Notifications from "./notifications";
 import router from "./router";
 import UCLAPI from "./uclapi";
-
-require("dotenv").config();
 
 // eslint-disable-next-line security/detect-non-literal-fs-filename
 const { version } = JSON.parse(fs.readFileSync(`./package.json`, `utf-8`));
@@ -45,6 +44,14 @@ if (!Environment.SECRET) {
   );
 }
 
+if (!Environment.NOTIFICATIONS_URL && !Environment.TEST_MODE) {
+  console.warn(
+    `Warning: You have not set the NOTIFICATION_URL ` +
+      `environment variable. This means that notification ` +
+      `actions will be disabled.`
+  );
+}
+
 app.keys = [Environment.SECRET || `secret`];
 
 if (!Environment.TEST_MODE) {
@@ -73,15 +80,16 @@ app.use(Pino());
 app.use(logger);
 app.use(jsonify);
 // import and use the UCL API router.
+app.use(mount(`/notifications`, Notifications));
 app.use(mount(UCLAPI));
 app.use(mount(router));
 
 app.on(`error`, ErrorManager.koaErrorHandler);
 
 if (!module.parent) {
-  const port = Environment.PORT || 443;
+  const port = Environment.PORT || 3000;
   app.listen(port);
-  console.log(`Tibi API listening on ${port}`);
+  console.log(`UCL Assistant API listening on ${port}`);
 }
 
 export default app;

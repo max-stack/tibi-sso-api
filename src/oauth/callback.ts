@@ -5,30 +5,30 @@ import User from "../uclapi/user";
 const { getToken, getUserData } = User;
 
 const callback = async (ctx: Context): Promise<void> => {
-  console.log(
-    "HIPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPYYYYYYYYYYYYYYYY"
-  );
-  console.log(ctx.session);
-  console.log("Hey");
-  if (!Object.keys(ctx.session).includes("state")) {
-    ctx.throw("You need to authorise first", 401);
+  if (!Object.keys(ctx.session).includes(`state`)) {
+    ctx.throw(`You need to authorise first`, 401);
   }
   const { result, code, state } = ctx.query;
 
+  // make sure states match.
   if (`${state}` !== `${ctx.session.state}`) {
-    ctx.throw("States don't match", 500);
+    ctx.throw(`States don't match`, 500);
   }
 
-  if (result === "denied") {
-    ctx.throw("request denied", 400);
+  // if user says "no"
+  if (result === `denied`) {
+    ctx.throw(`Request denied`, 400);
   }
 
+  // trade auth code for a token
   let json = await getToken(code);
 
+  // update session to include token.
   const apiToken = json.token;
 
   console.log(`made it`);
 
+  // fetch user data.
   json = await getUserData(apiToken);
 
   const user = {

@@ -12,7 +12,7 @@ export const timer = async (ctx: Context, next: Next): Promise<void> => {
   const start = new Date().getTime();
   await next();
   const ms = new Date().getTime() - start;
-  ctx.set("x-response-time", `${ms}ms`);
+  ctx.set(`x-response-time`, `${ms}ms`);
 };
 
 /**
@@ -33,7 +33,7 @@ export const jsonFormatPretty = (ctx: Context): string =>
   JSON.stringify(
     {
       content: ctx.body,
-      error: ctx.error || "",
+      error: ctx.error || ``,
     },
     null,
     2
@@ -66,6 +66,7 @@ export const jsonify = async (ctx: Context, next: Next): Promise<void> => {
     } else {
       ctx.error = JSON.stringify(error.message, null, 2);
     }
+
     if (![400, 404].includes(error.status)) {
       ErrorManager.addDetail({ response: error.response });
       ErrorManager.addDetail({ requestHeaders: ctx.headers });
@@ -75,6 +76,7 @@ export const jsonify = async (ctx: Context, next: Next): Promise<void> => {
     ctx.status = error.status || 500;
     ctx.body = { error: ctx.error };
   }
+
   if (ctx.state.jsonify) {
     // pretty-print if the pretty query variable is present
     ctx.body = ctx.query.pretty ? jsonFormatPretty(ctx) : jsonFormat(ctx);
