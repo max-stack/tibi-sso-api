@@ -8,7 +8,7 @@ const authorise = async (ctx: Context): Promise<void> => {
     state: moment().valueOf(),
     redirectURL: decodeURIComponent(ctx.query.return) || `UCLAssistant://+auth`,
   };
-  console.log(ctx.session);
+  console.log(ctx.query);
   const url = `${ApiRoutes.API_URL}/oauth/authorise?client_id=${Environment.CLIENT_ID}&state=${ctx.session.state}`;
   ctx.redirect(url);
 };
