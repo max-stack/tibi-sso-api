@@ -9,7 +9,6 @@ import { promisify } from "util";
 import Environment from "./lib/Environment";
 import ErrorManager from "./lib/ErrorManager";
 import { jsonify, logger, timer } from "./middleware";
-import Notifications from "./notifications";
 import router from "./router";
 import UCLAPI from "./uclapi";
 
@@ -80,7 +79,6 @@ app.use(Pino());
 app.use(logger);
 app.use(jsonify);
 // import and use the UCL API router.
-app.use(mount(`/notifications`, Notifications));
 app.use(mount(UCLAPI));
 app.use(mount(router));
 
@@ -89,7 +87,7 @@ app.on(`error`, ErrorManager.koaErrorHandler);
 if (!module.parent) {
   const port = Environment.PORT || 3000;
   app.listen(port);
-  console.log(`UCL Assistant API listening on ${port}`);
+  console.log(`Tibi API listening on ${port}`);
 }
 
 export default app;
