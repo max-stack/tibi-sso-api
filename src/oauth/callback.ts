@@ -3,6 +3,7 @@ import querystring from "querystring";
 import { genToken } from "../middleware/auth";
 import User from "../uclapi/user";
 const { getToken, getUserData } = User;
+import { ObjectId } from "bson";
 
 const callback = async (ctx: Context): Promise<void> => {
   console.log(ctx.session);
@@ -33,6 +34,9 @@ const callback = async (ctx: Context): Promise<void> => {
   json = await getUserData(apiToken);
 
   const user = {
+    aud: "test1-oraxf",
+    sub: new ObjectId(),
+    exp: new Date("December 17, 2020 03:24:00"),
     department: json.department,
     email: json.email,
     full_name: json.full_name,
