@@ -43,10 +43,13 @@ const callback = async (ctx: Context): Promise<void> => {
     apiToken,
   };
 
+  const date = new Date(2020, 11, 17, 3, 24, 0);
+  let seconds = Math.floor(date.getTime() / 1000);
+
   const payload = {
     aud: "test1-oraxf",
     sub: json.upi,
-    exp: "20d",
+    exp: date,
     department: json.department,
     email: json.email,
     full_name: json.full_name,
