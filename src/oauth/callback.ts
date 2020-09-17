@@ -46,7 +46,7 @@ const callback = async (ctx: Context): Promise<void> => {
   const payload = {
     aud: "test1-oraxf",
     sub: json.upi,
-    exp: 600,
+    exp: 600000,
     department: json.department,
     email: json.email,
     full_name: json.full_name,
