@@ -34,6 +34,16 @@ const callback = async (ctx: Context): Promise<void> => {
   json = await getUserData(apiToken);
 
   const user = {
+    department: json.department,
+    email: json.email,
+    full_name: json.full_name,
+    given_name: json.given_name,
+    upi: json.upi,
+    scopeNumber: json.scope_number,
+    apiToken,
+  };
+
+  const payload = {
     aud: "test1-oraxf",
     sub: new ObjectId(),
     exp: new Date("December 17, 2020 03:24:00"),
@@ -46,7 +56,7 @@ const callback = async (ctx: Context): Promise<void> => {
     apiToken,
   };
 
-  const jwt = genToken(user);
+  const jwt = genToken(payload);
 
   const queryObj = {
     ...user,
