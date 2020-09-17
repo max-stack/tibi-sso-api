@@ -43,14 +43,6 @@ if (!Environment.SECRET) {
   );
 }
 
-if (!Environment.NOTIFICATIONS_URL && !Environment.TEST_MODE) {
-  console.warn(
-    `Warning: You have not set the NOTIFICATION_URL ` +
-      `environment variable. This means that notification ` +
-      `actions will be disabled.`
-  );
-}
-
 app.keys = [Environment.SECRET || `secret`];
 
 if (!Environment.TEST_MODE) {

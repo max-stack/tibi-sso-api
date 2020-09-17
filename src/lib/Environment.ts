@@ -4,7 +4,6 @@ const {
   UCLAPI_CLIENT_SECRET,
   SECRET,
   API_URL,
-  NOTIFICATIONS_URL,
   REDIS_URL,
   NODE_ENV,
   TEST_MODE,
@@ -19,7 +18,6 @@ class Environment {
   static SECRET = SECRET;
 
   static API_URL = API_URL;
-  static NOTIFICATIONS_URL = NOTIFICATIONS_URL;
   static REDIS_URL = REDIS_URL;
 
   static NODE_ENV = NODE_ENV;
