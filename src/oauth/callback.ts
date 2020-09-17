@@ -43,7 +43,7 @@ const callback = async (ctx: Context): Promise<void> => {
     apiToken,
   };
 
-  const date = new Date("December 17, 2020 03:24:00");
+  const date = new Date(2020, 11, 17, 3, 24, 0);
 
   const payload = {
     aud: "test1-oraxf",
